@@ -31,8 +31,8 @@
 #define MAX_FRAME_DATA_SIZE 2500
 
 
-#define START_BYTE_1 0xc1
-#define START_BYTE_2 0xc0
+#define START_BYTE_1				0xc1
+#define START_BYTE_2				0xc0
 
 #define HEADER_BYTES				0xc0c1
 #define FOOTER_BYTES				0xc2c3c4c5
@@ -41,11 +41,11 @@
 
 
 //Implemented messages
-#define MSG_GET_HW_VERSION 			0x00000080
-#define MSG_GET_SW_VERSION 			0x00000090
-#define MSG_GET_SERIAL_NUMBER 		0x00000100
+#define MSG_GET_HW_VERSION			0x00000080
+#define MSG_GET_SW_VERSION			0x00000090
+#define MSG_GET_SERIAL_NUMBER		0x00000100
 
-#define MSG_GET_CORRECTED_SPECTRUM 	0x00101000
+#define MSG_GET_CORRECTED_SPECTRUM	0x00101000
 #define MSG_SET_INTEGRATION_TIME	0x00110010
 
 #define MSG_GET_AVG_SCANS			0x00110510
@@ -107,48 +107,42 @@ public:
 	 */
 	uint8_t getChecksumType();
 	void setChecksumType(uint8_t checksum);
+		
 	
-	/**
-	 * Returns the length of the frame data: all bytes after the api id, and prior to the checksum	 
-	 */
-	uint16_t getFrameDataLength();
-	
-	
-	/**
-	 * Returns the buffer that contains the message.	 
-	 */
-	uint8_t* getFrameData();
-	void setFrameData(uint8_t* frameDataPtr);
-
-	void setFrameLength(uint8_t frameLength);
-	// to support future 65535 byte packets I guess
 	/**
 	 * Returns the length of the packet
 	 */
 	uint16_t getPacketLength();
+	
 	/**
-	 * Resets the response to default values
+	 * Resets the message to default values
 	 */
 	void reset();
 	/**
 	 * Initializes the response
 	 */
+	 
 	void init();
 	bool isAvailable();
 	void setAvailable(bool complete);
+	
 	/**
 	 * Returns true if the response contains errors
 	 */
+	 
 	bool isError();
+	
 	/**
 	 * Returns an error code, or zero, if successful.
 	 * Error codes include: CHECKSUM_FAILURE, PACKET_EXCEEDS_BYTE_ARRAY_LENGTH, UNEXPECTED_START_BYTE
 	 */
 	uint8_t getErrorCode();
 	void setErrorCode(uint8_t errorCode);
+
 protected:
 	// pointer to frameData
 	uint8_t* _frameDataPtr;
+	
 private:
 	uint8_t _msgId;
 	uint8_t _msbLength;
